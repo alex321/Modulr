@@ -1,5 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+
+
+import 'rxjs/add/operator/switch';
+
+import {Component, OnInit} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
 
 import {AccountsService} from '../shared/accounts.service';
 
@@ -8,19 +12,32 @@ import {AccountsService} from '../shared/accounts.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  private _subscription: Subscription;
+export class DashboardComponent implements OnInit {
+  private searchSubject = new Subject<string>();
 
-  accounts: any[];
+  accounts: Observable<any[]>;
+  isLoading: boolean = true;
 
   constructor(private accountsService: AccountsService) {}
 
+  onSearchClick(search: string) { this.searchSubject.next(search); }
+
   ngOnInit() { this._initAccounts(); }
 
-  ngOnDestroy() { this._subscription.unsubscribe(); }
-
   private _initAccounts() {
-    this._subscription = this.accountsService.getAccounts(1).subscribe(
-        accounts => this.accounts = accounts);
+    let searchResultsStream =
+        this.searchSubject.do(() => { this.isLoading = true; })
+            .switchMap(search => {
+              return this.accountsService.getFilteredAccounts(1, search);
+            });
+
+    let initialAccounts =
+        this.accountsService.getAccounts(1).do(() => this.isLoading = true);
+
+    this.accounts =
+        Observable.concat(initialAccounts, searchResultsStream).do(() => {
+          console.log('HIT');
+          this.isLoading = false;
+        });
   }
 }

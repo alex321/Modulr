@@ -15,9 +15,9 @@
       <div class="col-md-6 col-xs-12 pl-0">
         <div class="form-group">
           <div class="input-group">
-            <input class="form-control form-control-lg" placeholder="Enter an account name or ID" id="search" type="search">
+            <input class="form-control form-control-lg" #search placeholder="Enter an account name or ID" id="search" type="search">
             <span class="input-group-btn">
-              <button class="btn btn-primary" type="button">Go</button>
+              <button class="btn btn-primary" type="button" (click)="onSearchClick(search.value)">Go</button>
             </span>
           </div>
         </div>
@@ -28,8 +28,9 @@
 
     </div>
 
-    <div class="row main">
-      <table class="table table-hover">
+    <div class="row main" fxFlex fxFlexFill>
+      <div fxFlex="1 1 auto" fxLayout="column" fxLayoutAlign="center center" [hidden]="!isLoading"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+      <table class="table table-hover" [hidden]="isLoading">
         <thead>
           <tr>
             <th scope="col">Account ID</th>
@@ -40,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let account of accounts">
+          <tr *ngFor="let account of accounts | async">
             <td>{{account.id}}</td>
             <td>{{account.name}}</td>
             <td>{{account.identifiers[0].accountNumber}}</td>
