@@ -1,16 +1,18 @@
 <div class="col" fxLayout="row">
   <div class="container" fxLayout="column">
-    <nav class="nav row" fxFlex="0 0 auto">
-      <a class="nav-link active" href="#">Customers</a>
-      <a class="nav-link disabled" href="#">Approvals</a>
-    </nav>
+    <header class="row mt-4 mb-2" fxFlex="0 0 auto">
+      <nav class="nav">
+        <a class="nav-link active pl-0" href="#">Customers</a>
+        <a class="nav-link disabled" href="#">Approvals</a>
+      </nav>
+    </header>
     <div class="row" fxFlex="0 0 auto">
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-xs-12 pl-0">
         <label for="search">Search for an account by account name or ID</label>
       </div>
     </div>
-    <div class="row" fxFlex="0 0 auto" fxLayoutAlign="space-between">
-      <div class="col-md-6 col-xs-12">
+    <div class="row mb-2" fxFlex="0 0 auto" fxLayoutAlign="space-between">
+      <div class="col-md-6 col-xs-12 pl-0">
         <div class="form-group">
           <div class="input-group">
             <input class="form-control form-control-lg" placeholder="Enter an account name or ID" id="search" type="search">
@@ -52,10 +54,14 @@
     <div class="row my-3" fxFlex="0 0 auto" fxFlexAlign="center">
       <nav aria-label="Accounts results">
         <ul class="pagination">
-          <li class="page-item mr-4"><a class="page-link" href="#"><span class="fa fa-lg fa-caret-left"></span></a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item disabled mr-4"><a class="page-link" href="#"><span class="fa fa-lg fa-caret-left"></span></a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item"><a class="page-link" href="#">...</a></li>
+          <li class="page-item"><a class="page-link" href="#">407</a></li>
           <li class="page-item ml-4"><a class="page-link" href="#"><span class="fa fa-lg fa-caret-right"></span></a></li>
         </ul>
       </nav>
