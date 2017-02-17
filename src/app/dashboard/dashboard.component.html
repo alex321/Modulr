@@ -1,0 +1,52 @@
+<div class="col" fxLayout="row">
+  <div class="container" fxLayout="column">
+    <nav class="nav row" fxFlex="0 0 auto">
+      <a class="nav-link active" href="#">Customers</a>
+      <a class="nav-link disabled" href="#">Approvals</a>
+    </nav>
+    <div class="row" fxFlex="0 0 auto">
+      <div class="col-md-6 col-xs-12">
+        <label for="search">Search for an account by account name or ID</label>
+      </div>
+    </div>
+    <div class="row" fxFlex="0 0 auto" fxLayoutAlign="space-between">
+      <div class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control form-control-lg" placeholder="Enter an account name or ID" id="search" type="search">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button">Go</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="button">Create new customer</button>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Account ID</th>
+            <th scope="col">Account Name</th>
+            <th scope="col">Account number</th>
+            <th scope="col">Sort code</th>
+            <th class="text-right" scope="col">Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of data">
+            <td>{{account.id}}</td>
+            <td>{{account.name}}</td>
+            <td>{{account.identifiers[0].accountNumber}}</td>
+            <td>{{account.identifiers[0].sortCode | mySortCode}}</td>
+            <td class="text-right">{{account.balance | currency: account.currency: true}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
